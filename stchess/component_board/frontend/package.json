@@ -12,8 +12,11 @@
     "@types/react-dom": "^16.9.0",
     "chess.js": "^0.11.0",
     "chessboardjsx": "^2.4.7",
+    "ii-react-chessboard": "^2.0.3",
     "react": "^16.13.1",
+    "react-chessboardjs-wrapper": "^0.4.2",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.4",
     "react-scripts": "3.4.1",
     "streamlit-component-lib": "^1.2.0",
     "typescript": "~3.7.2"

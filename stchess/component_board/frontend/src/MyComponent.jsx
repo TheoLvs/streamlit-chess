@@ -6,25 +6,22 @@ import {
 import React, { ReactNode } from "react"
 import ChessComponent from "./ChessComponent"
 
-interface State {
-  fen: string
-  lastMove:string
-}
 
 
-
-class MyComponent extends StreamlitComponentBase<State> {
-  public state = { 
+class MyComponent extends StreamlitComponentBase{
+  state = { 
     fen: "",
-    lastMove:"",
+    last_move:"",
+    is_checkmate:false,
   }
 
 
-  private onMove = ({fen,lastMove}:State): void => {
+  onMove = ({fen,last_move,is_checkmate}) => {
 
     let newState = {
       fen:fen,
-      lastMove:lastMove,
+      last_move:last_move,
+      is_checkmate:is_checkmate,
     }
     this.setState(
       prevState => (newState),
@@ -33,11 +30,25 @@ class MyComponent extends StreamlitComponentBase<State> {
 
   }
 
-  public render = (): ReactNode => {
+  // componentDidUpdate=(prevProps) => {
+  //   if (prevProps.args["start_fen"] !== this.props.args["start_fen"]){
+  //     console.log("HELLO",this.props.args)
+  //   }
+
+  // }
+
+  render = () => {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
     const color = this.props.args["color"]
+    const white = this.props.args["white"]
+    const black = this.props.args["black"]
 
+    console.log(white,black)
+
+
+
+    // console.log(fen)
 
     // Show a button and some text.
     // When the button is clicked, we'll increment our "numClicks" state
@@ -45,7 +56,7 @@ class MyComponent extends StreamlitComponentBase<State> {
     // be available to the Python program.
     return (
       <div style={{"textAlign":"center","height":500}}>
-        <ChessComponent color={color} onMove={this.onMove}/>
+        <ChessComponent color={color} white={white} black={black} onMove={this.onMove}/>
       </div>
     )
   }
